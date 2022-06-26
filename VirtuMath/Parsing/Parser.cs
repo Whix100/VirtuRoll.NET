@@ -13,10 +13,18 @@ public class Parser
     public Parser()
     {
         // language=regex
+        string LITERAL = @"(\d+\.?\d*)";
+        // language=regex
+        string CONSTANT = @"(inf|infinity|\u221E|pi|\u03C0|e|tau|\u03C4)";
+        // language=regex
+        string UNARY_OPERATORS = @"(\+|\-)";
+
+        // language=regex
         ParsingGrammar = new Grammar(new Rule[]
         {
-            new Rule(@"(\+|\-)(?=(\+|\-)*\d+\.?\d*)", ParseUnaryOperator),
-            new Rule(@"\d+\.?\d*", ParseLiteral)
+            new Rule($"({UNARY_OPERATORS})(?=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))", ParseUnaryOperator),
+            new Rule(LITERAL, ParseLiteral),
+            new Rule(CONSTANT, ParseConstant)
         });
     }
 
@@ -35,6 +43,9 @@ public class Parser
 
         throw new FormatException("The given input is not in a recognized format");
     }
+
+    private Number ParseConstant(string input, Token match)
+        => new Constant(input);
 
     private Number ParseLiteral(string input, Token match)
         => new Literal(Convert.ToDouble(input));
