@@ -9,7 +9,7 @@ public class BinaryOperator : Number
             { "-", (a, b) => a.Value - b.Value },
             { "*", (a, b) => a.Value * b.Value },
             { "/", (a, b) => a.Value / b.Value },
-            { "//", (a, b) => (int)(a.Value - b.Value) },
+            { "//", (a, b) => (int)(a.Value / b.Value) },
             { "%", (a, b) => a.Value % b.Value },
             { "^", (a, b) => Math.Pow(a.Value, b.Value) }
         };

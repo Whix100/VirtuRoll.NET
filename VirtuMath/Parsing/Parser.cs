@@ -25,22 +25,20 @@ public class Parser
         // language=regex
         string CONSTANT = @"(inf|infinity|\u221E|pi|\u03C0|e|tau|\u03C4)";
         // language=regex
-        string OPERAND = $"{UNARY_OPERATORS}*({LITERAL}|{CONSTANT})";
+        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT})\s*";
 
         // language=regex
         ParsingGrammar = new Grammar(new Rule[]
         {
             new Rule($"(?<={OPERAND})({ADDITION_OPERATORS})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
-            new Rule($"(?<=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))({MULTIPLICATION_OPERATORS})" +
-                $"(?=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))", ParseBinaryOperator,
+            new Rule($"(?<={OPERAND})({MULTIPLICATION_OPERATORS})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
-            new Rule($"(?<=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))({EXPONENTIAL_OPERATOR})" +
-                $"(?=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))", ParseBinaryOperator,
+            new Rule($"(?<={OPERAND})({EXPONENTIAL_OPERATOR})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
-            new Rule($"({UNARY_OPERATORS})(?=({UNARY_OPERATORS})*({LITERAL}|{CONSTANT}))", ParseUnaryOperator),
-            new Rule($"^{LITERAL}$", ParseLiteral),
-            new Rule($"^{CONSTANT}$", ParseConstant)
+            new Rule($"({UNARY_OPERATORS})(?={OPERAND})", ParseUnaryOperator),
+            new Rule($@"(?<=^\s*){LITERAL}(?=\s*$)", ParseLiteral),
+            new Rule($@"(?<=^\s*){CONSTANT}(?=\s*$)", ParseConstant)
         });
     }
 
@@ -49,10 +47,12 @@ public class Parser
         if (input is null)
             throw new ArgumentNullException(nameof(input));
 
+        Console.WriteLine($"'{input}'");
+
         foreach (Rule rule in ParsingGrammar)
         {
             Match match = Regex.Match(input, rule.RegularExpression, rule.RegularOptions);
-            
+
             if (match.Success)
                 return rule.Parse.Invoke(input, match);
         }
@@ -67,8 +67,8 @@ public class Parser
         => new UnaryOperator(match.Value, Parse(input[match.Length..]));
 
     private Number ParseLiteral(string input, Token match)
-        => new Literal(Convert.ToDouble(input));
+        => new Literal(Convert.ToDouble(match.Value));
 
     private Number ParseConstant(string input, Token match)
-        => new Constant(input);
+        => new Constant(match.Value);
 }
