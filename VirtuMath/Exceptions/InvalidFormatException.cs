@@ -2,9 +2,11 @@
 
 public class InvalidFormatException : Exception
 {
-    public InvalidFormatException() : base("The given input is not in a recognized format.")
+    public readonly string? Expression;
+
+    public InvalidFormatException() : base("Unrecognized format in expression")
     { }
 
-    public InvalidFormatException(string input) : base($"The given input, '{input}', is not in a recognized format.")
-    { }
+    public InvalidFormatException(string expression) : base($"Unrecognized format in expression, '{expression}'")
+        => Expression = expression;
 }

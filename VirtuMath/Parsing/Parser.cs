@@ -105,7 +105,7 @@ public class Parser
             {
                 if (i == clean_input.Length - 1)
                 {
-                    throw new Exception("Parenthesis are unbalanced");
+                    throw new UnbalancedParenthesesException(input);
                 }
                 else if (start == -1)
                 {
@@ -121,7 +121,7 @@ public class Parser
             {
                 if (start == -1)
                 {
-                    throw new Exception("Parenthesis are unbalanced");
+                    throw new UnbalancedParenthesesException(input);
                 }
                 else if (count > 0)
                 {
