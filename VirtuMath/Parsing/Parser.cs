@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using VirtuMath.Exceptions;
 using VirtuMath.Numbers;
 
 namespace VirtuMath.Parsing;
@@ -63,7 +64,7 @@ public class Parser
                 return rule.Parse.Invoke(input, match);
         }
 
-        throw new Exception("The given input is not in a recognized format");
+        throw new InvalidFormatException(input);
     }
 
     protected Number ParseWithParentheses(string input)
@@ -86,7 +87,7 @@ public class Parser
             }
         }
 
-        throw new Exception("The given input is not in a recognized format");
+        throw new InvalidFormatException(input);
     }
 
     protected static string TokenizeInput(string input, out List<Token> tokens)
