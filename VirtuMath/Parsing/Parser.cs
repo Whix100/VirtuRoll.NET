@@ -25,7 +25,7 @@ public class Parser
         // language=regex
         string CONSTANT = @"(inf|infinity|\u221E|pi|\u03C0|e|tau|\u03C4)";
         // language=regex
-        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT})\s*";
+        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT}|\[\d+\])\s*";
 
         // language=regex
         ParsingGrammar = new Grammar(new Rule[]
@@ -42,13 +42,19 @@ public class Parser
         });
     }
 
-    public Number Parse(string? input)
+    public Number Parse(string input)
     {
         if (input is null)
             throw new ArgumentNullException(nameof(input));
 
-        Console.WriteLine($"'{input}'");
+        if (input.Contains('(') || input.Contains(')'))
+            return ParseWithParentheses(input);
+        else
+            return ParseWithoutParentheses(input);
+    }
 
+    protected Number ParseWithoutParentheses(string input)
+    {
         foreach (Rule rule in ParsingGrammar)
         {
             Match match = Regex.Match(input, rule.RegularExpression, rule.RegularOptions);
@@ -57,7 +63,103 @@ public class Parser
                 return rule.Parse.Invoke(input, match);
         }
 
-        throw new FormatException("The given input is not in a recognized format");
+        throw new Exception("The given input is not in a recognized format");
+    }
+
+    protected Number ParseWithParentheses(string input)
+    {
+        string tok_input = TokenizeInput(input, out List<Token> tokens);
+
+        if (Regex.IsMatch(tok_input, @"^\[\d+\]$"))
+            return new Parenthetical(Parse(input[1..^1]));
+
+        foreach (Rule rule in ParsingGrammar)
+        {
+            Match match = Regex.Match(tok_input, rule.RegularExpression, rule.RegularOptions);
+
+            if (match.Success)
+            {
+                int index = match.Index;
+
+                DetokenizeInput(tok_input, tokens, ref index);
+                return rule.Parse.Invoke(input, new Token(match.Value, index));
+            }
+        }
+
+        throw new Exception("The given input is not in a recognized format");
+    }
+
+    protected static string TokenizeInput(string input, out List<Token> tokens)
+    {
+        tokens = new List<Token>();
+
+        string reference = String.Empty;
+        string clean_input = Regex.Replace(input, @"[\\\[\]]", new MatchEvaluator((m) => $@"\{m}"));
+        int start = -1;
+        int count = -1;
+
+        for (int i = 0; i < clean_input.Length; i++)
+        {
+            if (clean_input[i] == '(')
+            {
+                if (i == clean_input.Length - 1)
+                {
+                    throw new Exception("Parenthesis are unbalanced");
+                }
+                else if (start == -1)
+                {
+                    start = i;
+                    count++;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            else if (clean_input[i] == ')')
+            {
+                if (start == -1)
+                {
+                    throw new Exception("Parenthesis are unbalanced");
+                }
+                else if (count > 0)
+                {
+                    count--;
+                }
+                else
+                {
+                    tokens.Add(new Token(clean_input[start..(i + 1)], start));
+                    start = -1;
+                    count = -1;
+                    reference += $"[{tokens.Count - 1}]";
+                }
+            }
+            else if (count == -1)
+            {
+                reference += clean_input[i];
+            }
+        }
+
+        input = reference;
+        return reference;
+    }
+
+    protected static string DetokenizeInput(string input, List<Token> tokens, ref int index)
+    {
+        string output = input;
+        int offset = 0;
+        MatchCollection matches = Regex.Matches(input, @"\[\d+\]");
+
+        for (int i = 0; i < matches.Count; i++)
+        {
+            if (matches[i].Index + offset < index)
+                offset += tokens[i].Length - matches[i].Length;
+
+            output = output.Replace($"[{i}]", tokens[i].Value);
+        }
+
+        index += offset;
+        return output;
     }
 
     private Number ParseBinaryOperator(string input, Token match)
