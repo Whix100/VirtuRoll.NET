@@ -6,11 +6,17 @@ namespace VirtuMath.Parsing;
 
 public class Parser
 {
+    /// <summary>
+    /// The ParsingGrammar the Parser will use.
+    /// </summary>
     public Grammar ParsingGrammar
     {
         get;
     }
 
+    /// <summary>
+    /// Creates a Parser with the default Grammar in it.
+    /// </summary>
     public Parser()
     {
         // language=regex
@@ -43,6 +49,12 @@ public class Parser
         });
     }
 
+    /// <summary>
+    /// Parses an expression into a Number.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <returns>A Number created from the inputted expression.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <c>input</c> is <c>null</c>.</exception>
     public Number Parse(string input)
     {
         if (input is null)
@@ -54,6 +66,14 @@ public class Parser
             return ParseWithoutParentheses(input);
     }
 
+    /// <summary>
+    /// Parses an expression that does not contain parentheses.
+    /// </summary>
+    /// <param name="input">A math expression without parentheses to be parsed.</param>
+    /// <returns>A Number created from the inputted expression.</returns>
+    /// <exception cref="InvalidFormatException">
+    /// Thrown if <c>input</c> doesn't match any of the rules in <c>ParsingGrammar</c>
+    /// </exception>
     protected Number ParseWithoutParentheses(string input)
     {
         foreach (Rule rule in ParsingGrammar)
@@ -67,6 +87,14 @@ public class Parser
         throw new InvalidFormatException(input);
     }
 
+    /// <summary>
+    /// Parses an expression that contains parentheses.
+    /// </summary>
+    /// <param name="input">A math expression with parentheses to be parsed.</param>
+    /// <returns>A Number created from the inputted expression.</returns>
+    /// <exception cref="InvalidFormatException">
+    /// Thrown if <c>input</c> doesn't match any of the rules in <c>ParsingGrammar</c>
+    /// </exception>
     protected Number ParseWithParentheses(string input)
     {
         string tok_input = TokenizeInput(input, out List<Token> tokens);
@@ -90,6 +118,13 @@ public class Parser
         throw new InvalidFormatException(input);
     }
 
+    /// <summary>
+    /// Replaces parenthetical parts of the expression with easier to parse token tags.
+    /// </summary>
+    /// <param name="input">The expression to be tokenized.</param>
+    /// <param name="tokens">A List of Tokens to be outputted.</param>
+    /// <returns>A string with parentheticals replaced with token tags.</returns>
+    /// <exception cref="UnbalancedParenthesesException"></exception>
     protected static string TokenizeInput(string input, out List<Token> tokens)
     {
         tokens = new List<Token>();
@@ -145,6 +180,14 @@ public class Parser
         return reference;
     }
 
+    /// <summary>
+    /// Converts a tokenized expression into a non-tokenized expression while getting the index offset of a match in the
+    /// expression.
+    /// </summary>
+    /// <param name="input">The tokenized expression.</param>
+    /// <param name="tokens">The tokens that belong in the expression.</param>
+    /// <param name="index">The index of the position of the match.</param>
+    /// <returns>The detokenized expression.</returns>
     protected static string DetokenizeInput(string input, List<Token> tokens, ref int index)
     {
         string output = input;
@@ -163,15 +206,39 @@ public class Parser
         return output;
     }
 
+    /// <summary>
+    /// Parses an expression into a BinaryOperator.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A BinaryOperator parsed from the input expression.</returns>
     private Number ParseBinaryOperator(string input, Token match)
         => new BinaryOperator(match.Value, Parse(input[..match.Index]), Parse(input[(match.Index + match.Length)..]));
 
+    /// <summary>
+    /// Parses an expression into a UnaryOperator.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A UnaryOperator parsed from the input expression.</returns>
     private Number ParseUnaryOperator(string input, Token match)
         => new UnaryOperator(match.Value, Parse(input[match.Length..]));
 
+    /// <summary>
+    /// Parses an expression into a Literal.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A Literal parsed from the input expression.</returns>
     private Number ParseLiteral(string input, Token match)
         => new Literal(Convert.ToDouble(match.Value));
 
+    /// <summary>
+    /// Parses an expression into a Constant.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A Constant parsed from the input expression.</returns>
     private Number ParseConstant(string input, Token match)
         => new Constant(match.Value);
 }

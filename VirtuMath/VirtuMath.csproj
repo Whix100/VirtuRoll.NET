@@ -4,6 +4,26 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Description>A .NET 6 library designed to make parsing math and math-like expressions simple</Description>
+    <Copyright>Whix100</Copyright>
+    <PackageProjectUrl>https://github.com/Whix100/VirtuMath.NET/</PackageProjectUrl>
+    <PackageIcon>VirtuMath_x256.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Whix100/VirtuMath.NET/</RepositoryUrl>
+    <PackageTags>csharp;netcore;dotnet;math;parser;expression</PackageTags>
+    <PackageLicenseFile>C:\SharedFiles\Programming\VirtuMath.NET\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Logo\VirtuMath_x256.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

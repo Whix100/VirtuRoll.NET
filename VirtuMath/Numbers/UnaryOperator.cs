@@ -15,9 +15,21 @@ public class UnaryOperator : Number
     public override Number[] Children
         => new Number[] { Inside };
 
+    /// <summary>
+    /// The operator to set the function of the UnaryOperator.
+    /// </summary>
     public readonly string Operator;
+
+    /// <summary>
+    /// The Number inside the UnaryOperator.
+    /// </summary>
     public readonly Number Inside;
 
+    /// <summary>
+    /// Creates a UnaryOperator from the specified operator and inside Number.
+    /// </summary>
+    /// <param name="op">The operator for the UnaryOperator.</param>
+    /// <param name="inside">The inside Number for the UnaryOperator.</param>
     public UnaryOperator(string op, Number inside)
     {
         Operator = op;

@@ -5,6 +5,10 @@ public class Literal : Number
     public override Number[] Children
         => Array.Empty<Number>();
 
+    /// <summary>
+    /// Creates a new Literal with the provided value.
+    /// </summary>
+    /// <param name="value">The value of the literal.</param>
     public Literal(double value)
         => Value = value;
 

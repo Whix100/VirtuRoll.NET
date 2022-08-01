@@ -8,8 +8,15 @@ public class Parenthetical : Number
     public override Number[] Children
         => new Number[] { Inside };
 
+    /// <summary>
+    /// The Number inside the Parenthetical.
+    /// </summary>
     public readonly Number Inside;
 
+    /// <summary>
+    /// Creates a Parenthetical from the provided inside Number.
+    /// </summary>
+    /// <param name="inside"></param>
     public Parenthetical(Number inside)
         => Inside = inside;
 

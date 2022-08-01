@@ -21,8 +21,15 @@ public class Constant : Number
     public override Number[] Children
         => Array.Empty<Number>();
 
+    /// <summary>
+    /// The symbol that represents the Constant.
+    /// </summary>
     public readonly string Symbol;
 
+    /// <summary>
+    /// Creates a constant using the provided symbol.
+    /// </summary>
+    /// <param name="symbol">The symbol for the value of the Constant.</param>
     public Constant(string symbol)
         => Symbol = symbol;
 
