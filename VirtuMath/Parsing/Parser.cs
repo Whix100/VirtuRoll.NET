@@ -6,6 +6,8 @@ namespace VirtuMath.Parsing;
 
 public class Parser
 {
+    private Dictionary<string, Number> cache = new Dictionary<string, Number>();
+
     /// <summary>
     /// The ParsingGrammar the Parser will use.
     /// </summary>
@@ -60,10 +62,20 @@ public class Parser
         if (input is null)
             throw new ArgumentNullException(nameof(input));
 
+        string clean_input = Regex.Replace(input, @"\s+", " ");
+
+        if (cache.ContainsKey(clean_input))
+            return cache[clean_input];
+
+        Number result;
+
         if (input.Contains('(') || input.Contains(')'))
-            return ParseWithParentheses(input);
+            result = ParseWithParentheses(input);
         else
-            return ParseWithoutParentheses(input);
+            result = ParseWithoutParentheses(input);
+
+        cache.TryAdd(clean_input, result);
+        return result;
     }
 
     /// <summary>
@@ -195,6 +207,19 @@ public class Parser
                 break;
 
         return index + offset;
+    }
+
+    /// <summary>
+    /// Returns whether the parser cache contains the input expression.
+    /// </summary>
+    /// <param name="input">The expression to check in the parser cache.</param>
+    /// <returns><c>true</c> if the cache contains the expression. <c>false</c> otherwise.</returns>
+    public bool ContainsCacheKey(string? input)
+    {
+        if (input is null)
+            return false;
+
+        return cache.ContainsKey(Regex.Replace(input, @"\s+", " "));
     }
 
     /// <summary>
