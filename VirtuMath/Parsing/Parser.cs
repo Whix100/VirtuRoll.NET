@@ -177,12 +177,12 @@ public class Parser
     }
 
     /// <summary>
-    /// Converts a tokenized expression into a non-tokenized expression while getting the index offset of a match in the
-    /// expression.
+    /// Converts a match index of a tokenized expression into the corresponding index of the detokenized expression.
     /// </summary>
     /// <param name="input">The tokenized expression.</param>
     /// <param name="tokens">The tokens that belong in the expression.</param>
     /// <param name="index">The index of the position of the match.</param>
+    /// <returns>The position in the detokenized string where the token match is.</returns>
     protected static int DetokenizeIndex(string input, List<Token> tokens, int index)
     {
         int offset = 0;
