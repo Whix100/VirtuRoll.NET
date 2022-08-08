@@ -223,6 +223,12 @@ public class Parser
     }
 
     /// <summary>
+    /// Clears the cache of the parser.
+    /// </summary>
+    public void ClearCache()
+        => cache.Clear();
+
+    /// <summary>
     /// Parses an expression into a BinaryOperator.
     /// </summary>
     /// <param name="input">A math expression to be parsed.</param>
