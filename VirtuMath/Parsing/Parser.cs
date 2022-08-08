@@ -107,12 +107,8 @@ public class Parser
             Match match = Regex.Match(tok_input, rule.RegularExpression, rule.RegularOptions);
 
             if (match.Success)
-            {
-                int index = match.Index;
-
-                DetokenizeInput(tok_input, tokens, ref index);
-                return rule.Parse.Invoke(input, new Token(match.Value, index));
-            }
+                return rule.Parse.Invoke(input,
+                    new Token(match.Value, DetokenizeIndex(tok_input, tokens, match.Index)));
         }
 
         throw new InvalidFormatException(input);
@@ -187,23 +183,18 @@ public class Parser
     /// <param name="input">The tokenized expression.</param>
     /// <param name="tokens">The tokens that belong in the expression.</param>
     /// <param name="index">The index of the position of the match.</param>
-    /// <returns>The detokenized expression.</returns>
-    protected static string DetokenizeInput(string input, List<Token> tokens, ref int index)
+    protected static int DetokenizeIndex(string input, List<Token> tokens, int index)
     {
-        string output = input;
         int offset = 0;
         MatchCollection matches = Regex.Matches(input, @"\[\d+\]");
 
         for (int i = 0; i < matches.Count; i++)
-        {
             if (matches[i].Index + offset < index)
                 offset += tokens[i].Length - matches[i].Length;
+            else
+                break;
 
-            output = output.Replace($"[{i}]", tokens[i].Value);
-        }
-
-        index += offset;
-        return output;
+        return index + offset;
     }
 
     /// <summary>
