@@ -52,6 +52,12 @@ public class Parser
     }
 
     /// <summary>
+    /// Creates a Parser with the default Grammar in it.
+    /// </summary>
+    public Parser(Grammar parsing_grammar)
+        => ParsingGrammar = parsing_grammar;
+
+    /// <summary>
     /// Parses an expression into a Number.
     /// </summary>
     /// <param name="input">A math expression to be parsed.</param>
