@@ -11,13 +11,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("VirtuMath")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Whix100")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Whix100")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A .NET 6 library designed to make parsing math and math-like expressions simple")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("VirtuMath")]
+[assembly: System.Reflection.AssemblyProductAttribute("VirtuMath.NET")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VirtuMath")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/Whix100/VirtuMath.NET/")]

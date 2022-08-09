@@ -25,8 +25,7 @@ public class Parenthetical : Number
         switch (format)
         {
             case FormatEnum.Tags:
-                return $"<Constant>" +
-                    Inside.ToString(number_format, format).Replace("\n", "\n\t");
+                return ConvertToTagString<Parenthetical>(this, number_format);
             default:
                 return $"({Inside.ToString(number_format, format)})";
         }
