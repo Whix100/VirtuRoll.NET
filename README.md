@@ -14,7 +14,7 @@ VirtuMath.NET is a .NET 6 library designed to make parsing math and math-like ex
 ## Installation
 
 ### Stable
-The stable package of VirtuMath.NET will be available through NuGet.
+The stable package of VirtuMath.NET is available through [NuGet](https://www.nuget.org/packages/VirtuMath.NET/).
 
 ### Development
 To obtain the development build of this project, you can clone or download the dev branch of this project and build it on your own device. This process may vary dependending on the device.
@@ -29,6 +29,7 @@ You will need the following in order to compile ColorSpaces.NET
 - [x] Unary Operations (Positive, Negative)
 - [X] Parentheses
 - [X] Constants (Infinity, Pi, e, Tau)
+- [X] Parser Cache
 - [ ] Unary Operators (Factorial, Percent)
 - [ ] Multiplication without *
 - [ ] Equation/Inequality Solving
