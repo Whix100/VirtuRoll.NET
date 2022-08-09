@@ -17,7 +17,7 @@ public class Literal : Number
         switch (format)
         {
             case FormatEnum.Tags:
-                return $"<Literal Value={Value.ToString(number_format)}>";
+                return ConvertToTagString<Literal>(this, number_format);
             default:
                 return Value.ToString(number_format);
         }
