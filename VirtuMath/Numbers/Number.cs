@@ -116,4 +116,25 @@ public abstract class Number
 
     public static bool operator <=(Number a, Number b)
         => a.Value <= b.Value;
+
+    public static Number operator -(Number a)
+        => new UnaryOperator("-", a);
+
+    public static Number operator +(Number a)
+        => new UnaryOperator("+", a);
+
+    public static Number operator +(Number a, Number b)
+        => new BinaryOperator("+", a, b);
+
+    public static Number operator -(Number a, Number b)
+        => new BinaryOperator("-", a, b);
+
+    public static Number operator *(Number a, Number b)
+        => new BinaryOperator("*", a, b);
+
+    public static Number operator /(Number a, Number b)
+        => new BinaryOperator("/", a, b);
+
+    public static Number operator %(Number a, Number b)
+        => new BinaryOperator("%", a, b);
 }
