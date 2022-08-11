@@ -1,6 +1,6 @@
 ﻿namespace VirtuMath.Numbers;
 
-public abstract class Number : IComparable, IComparable<Number>
+public abstract class Number : IComparable, IComparable<Number>, IConvertible
 {
     /// <summary>
     /// The numeric value of the Number.
@@ -75,6 +75,57 @@ public abstract class Number : IComparable, IComparable<Number>
 
         return 0;
     }
+
+    public TypeCode GetTypeCode()
+        => TypeCode.Object;
+
+    public bool ToBoolean(IFormatProvider? provider)
+        => Convert.ToBoolean(Value);
+
+    public byte ToByte(IFormatProvider? provider)
+        => Convert.ToByte(Value);
+
+    public char ToChar(IFormatProvider? provider)
+        => throw new InvalidCastException();
+
+    public DateTime ToDateTime(IFormatProvider? provider)
+        => throw new InvalidCastException();
+
+    public decimal ToDecimal(IFormatProvider? provider)
+        => Convert.ToDecimal(Value);
+
+    public double ToDouble(IFormatProvider? provider)
+        => Value;
+
+    public short ToInt16(IFormatProvider? provider)
+        => Convert.ToInt16(Value);
+
+    public int ToInt32(IFormatProvider? provider)
+        => Convert.ToInt32(Value);
+
+    public long ToInt64(IFormatProvider? provider)
+        => Convert.ToInt64(Value);
+
+    public sbyte ToSByte(IFormatProvider? provider)
+        => Convert.ToSByte(Value);
+
+    public float ToSingle(IFormatProvider? provider)
+        => Convert.ToSingle(Value);
+
+    public string ToString(IFormatProvider? provider)
+        => Value.ToString(provider);
+
+    public object ToType(Type conversion_type, IFormatProvider? provider)
+        => Convert.ChangeType(Value, conversion_type);
+
+    public ushort ToUInt16(IFormatProvider? provider)
+        => Convert.ToUInt16(Value);
+
+    public uint ToUInt32(IFormatProvider? provider)
+        => Convert.ToUInt32(Value);
+
+    public ulong ToUInt64(IFormatProvider? provider)
+        => Convert.ToUInt64(Value);
 
     public static implicit operator short(Number n)
         => (short)n.Value;
