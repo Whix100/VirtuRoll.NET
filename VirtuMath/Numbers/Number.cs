@@ -1,6 +1,6 @@
 ﻿namespace VirtuMath.Numbers;
 
-public abstract class Number : IComparable, IComparable<Number>, IConvertible
+public abstract class Number : IComparable, IComparable<Number>, IConvertible, IEquatable<Number>
 {
     /// <summary>
     /// The numeric value of the Number.
@@ -50,6 +50,22 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible
     /// <param name="format">The format to represent the Number as.</param>
     /// <returns>A string representation of the current Number.</returns>
     public abstract string ToString(string? number_format, FormatEnum format);
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Number n)
+            return Equals(n);
+
+        return false;
+    }
+
+    public bool Equals(Number? n)
+    {
+        if (n is null)
+            return false;
+
+        return n.Value == Value;
+    }
 
     public int CompareTo(object? obj)
     {
