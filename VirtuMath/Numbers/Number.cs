@@ -50,4 +50,52 @@ public abstract class Number
     /// <param name="format">The format to represent the Number as.</param>
     /// <returns>A string representation of the current Number.</returns>
     public abstract string ToString(string? number_format, FormatEnum format);
+
+    public static implicit operator short(Number n)
+        => (short)n.Value;
+
+    public static implicit operator int(Number n)
+        => (int)n.Value;
+
+    public static implicit operator long(Number n)
+        => (long)n.Value;
+
+    public static implicit operator ushort(Number n)
+        => (ushort)n.Value;
+
+    public static implicit operator uint(Number n)
+        => (uint)n.Value;
+
+    public static implicit operator ulong(Number n)
+        => (ulong)n.Value;
+
+    public static implicit operator float(Number n)
+        => (float)n.Value;
+
+    public static implicit operator double(Number n)
+        => n.Value;
+
+    public static explicit operator Number(short n)
+        => new Literal(n);
+
+    public static explicit operator Number(int n)
+        => new Literal(n);
+
+    public static explicit operator Number(long n)
+        => new Literal(n);
+
+    public static explicit operator Number(ushort n)
+        => new Literal(n);
+
+    public static explicit operator Number(uint n)
+        => new Literal(n);
+
+    public static explicit operator Number(ulong n)
+        => new Literal(n);
+
+    public static explicit operator Number(float n)
+        => new Literal(n);
+
+    public static explicit operator Number(double n)
+        => new Literal(n);
 }
