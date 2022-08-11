@@ -86,10 +86,10 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible
         => Convert.ToByte(Value);
 
     public char ToChar(IFormatProvider? provider)
-        => throw new InvalidCastException();
+        => throw new InvalidCastException($"Invalid cast from '{GetType()}' to 'Char'");
 
     public DateTime ToDateTime(IFormatProvider? provider)
-        => throw new InvalidCastException();
+        => throw new InvalidCastException($"Invalid cast from '{GetType()}' to 'DateTime'");
 
     public decimal ToDecimal(IFormatProvider? provider)
         => Convert.ToDecimal(Value);
