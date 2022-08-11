@@ -98,4 +98,22 @@ public abstract class Number
 
     public static explicit operator Number(double n)
         => new Literal(n);
+
+    public static bool operator ==(Number a, Number b)
+        => a.Value == b.Value;
+
+    public static bool operator !=(Number a, Number b)
+        => a.Value != b.Value;
+
+    public static bool operator >(Number a, Number b)
+        => a.Value > b.Value;
+
+    public static bool operator <(Number a, Number b)
+        => a.Value < b.Value;
+
+    public static bool operator >=(Number a, Number b)
+        => a.Value >= b.Value;
+
+    public static bool operator <=(Number a, Number b)
+        => a.Value <= b.Value;
 }
