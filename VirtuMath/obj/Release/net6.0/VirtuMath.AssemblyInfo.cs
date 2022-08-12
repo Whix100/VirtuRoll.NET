@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Whix100")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Whix100")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A .NET 6 library designed to make parsing math and math-like expressions simple")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.0.0")]
