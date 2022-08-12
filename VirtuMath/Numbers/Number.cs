@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace VirtuMath.Numbers;
+﻿namespace VirtuMath.Numbers;
 
 public abstract class Number : IComparable, IComparable<Number>, IConvertible, IEquatable<Number>
 {
