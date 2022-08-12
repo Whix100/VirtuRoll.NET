@@ -51,6 +51,9 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible, I
     /// <returns>A string representation of the current Number.</returns>
     public abstract string ToString(string? number_format, FormatEnum format);
 
+    public override int GetHashCode()
+        => Value.GetHashCode();
+
     public override bool Equals(object? obj)
     {
         if (obj is Number n)
