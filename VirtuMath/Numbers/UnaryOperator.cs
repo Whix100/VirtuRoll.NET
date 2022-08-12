@@ -41,8 +41,7 @@ public class UnaryOperator : Number
         switch (format)
         {
             case FormatEnum.Tags:
-                return $"<UnaryOperator Operator={Operator} Value={Value.ToString(number_format)}>" +
-                    Inside.ToString(number_format, format).Replace("\n", "\n\t");
+                return ConvertToTagString<UnaryOperator>(this, number_format);
             default:
                 return Operator + Inside;
         }

@@ -38,7 +38,7 @@ public class Constant : Number
         switch (format)
         {
             case FormatEnum.Tags:
-                return $"<Constant Symbol={Symbol}>";
+                return ConvertToTagString<Constant>(this, number_format);
             default:
                 return Symbol;
         }

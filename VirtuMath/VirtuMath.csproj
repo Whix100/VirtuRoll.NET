@@ -8,19 +8,18 @@
     <Copyright>Whix100</Copyright>
     <PackageProjectUrl>https://github.com/Whix100/VirtuMath.NET/</PackageProjectUrl>
     <PackageIcon>VirtuMath_x256.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile></PackageReadmeFile>
     <RepositoryUrl>https://github.com/Whix100/VirtuMath.NET/</RepositoryUrl>
     <PackageTags>csharp;netcore;dotnet;math;parser;expression</PackageTags>
-    <PackageLicenseFile>C:\SharedFiles\Programming\VirtuMath.NET\LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Authors>Whix100</Authors>
+    <PackageId>$(AssemblyName).NET</PackageId>
+    <Product>$(AssemblyName).NET</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\Logo\VirtuMath_x256.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

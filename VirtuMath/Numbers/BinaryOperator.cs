@@ -53,9 +53,7 @@ public class BinaryOperator : Number
         switch (format)
         {
             case FormatEnum.Tags:
-                return $"<BinaryOperator Operator={Operator} Value={Value.ToString(number_format)}>" +
-                    Left.ToString(number_format, format).Replace("\n", "\n\t") + "\n" +
-                    Right.ToString(number_format, format).Replace("\n", "\n\t");
+                return ConvertToTagString<BinaryOperator>(this, number_format);
             default:
                 return Left + Operator + Right;
         }
