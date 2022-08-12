@@ -5,10 +5,10 @@
   },
   "projects": {
     "C:\\SharedFiles\\Programming\\VirtuMath.NET\\VirtuMath\\VirtuMath.csproj": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "restore": {
         "projectUniqueName": "C:\\SharedFiles\\Programming\\VirtuMath.NET\\VirtuMath\\VirtuMath.csproj",
-        "projectName": "VirtuMath",
+        "projectName": "VirtuMath.NET",
         "projectPath": "C:\\SharedFiles\\Programming\\VirtuMath.NET\\VirtuMath\\VirtuMath.csproj",
         "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
         "outputPath": "C:\\SharedFiles\\Programming\\VirtuMath.NET\\VirtuMath\\obj\\",
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }
