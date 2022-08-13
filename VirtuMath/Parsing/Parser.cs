@@ -117,8 +117,8 @@ public class Parser
     {
         string tok_input = TokenizeInput(input, out List<Token> tokens);
 
-        if (Regex.IsMatch(tok_input, @"^\[\d+\]$"))
-            return new Parenthetical(Parse(input[1..^1]));
+        if (Regex.IsMatch(tok_input, @"^\s*\[\d+\]\s*$"))
+            return ParseParenthetical(input, new Token(input, 0));
 
         foreach (Rule rule in ParsingGrammar)
         {
@@ -233,6 +233,15 @@ public class Parser
     /// </summary>
     public void ClearCache()
         => cache.Clear();
+
+    /// <summary>
+    /// Parses an expression into a Parenthetical.
+    /// </summary>
+    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A Parenthetical parsed from the input expression.</returns>
+    private Number ParseParenthetical(string input, Token match)
+        => new Parenthetical(Parse(Regex.Replace(input, @"(^\s*\()|(\)\s*$)", "")));
 
     /// <summary>
     /// Parses an expression into a BinaryOperator.
