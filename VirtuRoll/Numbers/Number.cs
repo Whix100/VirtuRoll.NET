@@ -66,7 +66,7 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible, I
             .Select((p) => $"{p.Name} = {ConvertToTypeString(p.GetValue(number), number_format)}")
             .Concat(
                 number.GetType().GetFields()
-                .Where((f) => f.FieldType != typeof(Number))
+                .Where((f) => f.FieldType != typeof(Number) && !f.Name.Equals("Values"))
                 .Select((f) => $"{f.Name} = {ConvertToTypeString(f.GetValue(number), number_format)}"));
 
         return $"<{number.GetType().Name} {String.Join(" ", members)}>" +

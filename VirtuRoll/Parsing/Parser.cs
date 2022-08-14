@@ -21,6 +21,8 @@ public class Parser
     /// </summary>
     public Parser()
     {
+        //language=regex
+        string NUMSET = @"^[^\,]*(\,[^\,]*)+";
         // language=regex
         string ADDITION_OPERATORS = @"(\+|\-)";
         // language=regex
@@ -39,6 +41,7 @@ public class Parser
         // language=regex
         ParsingGrammar = new Grammar(new Rule[]
         {
+            new Rule(NUMSET, ParseNumberSet, RegexOptions.IgnoreCase),
             new Rule($"(?<={OPERAND})({ADDITION_OPERATORS})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
             new Rule($"(?<={OPERAND})({MULTIPLICATION_OPERATORS})(?={OPERAND})", ParseBinaryOperator,
@@ -60,7 +63,7 @@ public class Parser
     /// <summary>
     /// Parses an expression into a Number.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <returns>A Number created from the inputted expression.</returns>
     /// <exception cref="ArgumentNullException">Thrown if <c>input</c> is <c>null</c>.</exception>
     public Number Parse(string input)
@@ -87,7 +90,7 @@ public class Parser
     /// <summary>
     /// Parses an expression that does not contain parentheses.
     /// </summary>
-    /// <param name="input">A math expression without parentheses to be parsed.</param>
+    /// <param name="input">An expression without parentheses to be parsed.</param>
     /// <returns>A Number created from the inputted expression.</returns>
     /// <exception cref="InvalidFormatException">
     /// Thrown if <c>input</c> doesn't match any of the rules in <c>ParsingGrammar</c>
@@ -108,7 +111,7 @@ public class Parser
     /// <summary>
     /// Parses an expression that contains parentheses.
     /// </summary>
-    /// <param name="input">A math expression with parentheses to be parsed.</param>
+    /// <param name="input">An expression with parentheses to be parsed.</param>
     /// <returns>A Number created from the inputted expression.</returns>
     /// <exception cref="InvalidFormatException">
     /// Thrown if <c>input</c> doesn't match any of the rules in <c>ParsingGrammar</c>
@@ -237,16 +240,25 @@ public class Parser
     /// <summary>
     /// Parses an expression into a Parenthetical.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
     /// <returns>A Parenthetical parsed from the input expression.</returns>
     private Number ParseParenthetical(string input, Token match)
         => new Parenthetical(Parse(Regex.Replace(input, @"(^\s*\()|(\)\s*$)", "")));
 
     /// <summary>
+    /// Parses an expression into a NumberSet.
+    /// </summary>
+    /// <param name="input">An expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A NumberSet parsed from the input expression.</returns>
+    private Number ParseNumberSet(string input, Token match)
+        => new NumberSet(Regex.Split(input, @"\s*\,\s*").Select((e) => Parse(e)));
+
+    /// <summary>
     /// Parses an expression into a BinaryOperator.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
     /// <returns>A BinaryOperator parsed from the input expression.</returns>
     private Number ParseBinaryOperator(string input, Token match)
@@ -255,7 +267,7 @@ public class Parser
     /// <summary>
     /// Parses an expression into a UnaryOperator.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
     /// <returns>A UnaryOperator parsed from the input expression.</returns>
     private Number ParseUnaryOperator(string input, Token match)
@@ -264,7 +276,7 @@ public class Parser
     /// <summary>
     /// Parses an expression into a Literal.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
     /// <returns>A Literal parsed from the input expression.</returns>
     private Number ParseLiteral(string input, Token match)
@@ -273,7 +285,7 @@ public class Parser
     /// <summary>
     /// Parses an expression into a Constant.
     /// </summary>
-    /// <param name="input">A math expression to be parsed.</param>
+    /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
     /// <returns>A Constant parsed from the input expression.</returns>
     private Number ParseConstant(string input, Token match)

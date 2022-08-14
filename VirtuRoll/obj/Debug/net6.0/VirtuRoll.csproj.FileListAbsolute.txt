@@ -1,0 +1,12 @@
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\bin\Debug\net6.0\VirtuRoll.deps.json
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\bin\Debug\net6.0\VirtuRoll.dll
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\bin\Debug\net6.0\VirtuRoll.pdb
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.csproj.AssemblyReference.cache
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.GeneratedMSBuildEditorConfig.editorconfig
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.AssemblyInfoInputs.cache
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.AssemblyInfo.cs
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.csproj.CoreCompileInputs.cache
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.dll
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\refint\VirtuRoll.dll
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\VirtuRoll.pdb
+C:\SharedFiles\Programming\VirtuRoll.NET\VirtuRoll\obj\Debug\net6.0\ref\VirtuRoll.dll
