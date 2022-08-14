@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <VersionPrefix>1.1.1</VersionPrefix>
+    <Description>A .NET 6 library designed to make parsing math and math-like expressions simple</Description>
+    <Copyright>Whix100</Copyright>
+    <PackageProjectUrl>https://github.com/Whix100/VirtuMath.NET/</PackageProjectUrl>
+    <PackageIcon>VirtuMath_x256.png</PackageIcon>
+    <PackageReadmeFile></PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Whix100/VirtuMath.NET/</RepositoryUrl>
+    <PackageTags>csharp;netcore;dotnet;math;parser;expression</PackageTags>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Authors>Whix100</Authors>
+    <PackageId>$(AssemblyName).NET</PackageId>
+    <Product>$(AssemblyName).NET</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <FileVersion></FileVersion>
+    <PackageReleaseNotes>Added implementation of the IComparable, IComparable&lt;Number&gt;, IConvertible, IEquatable&lt;Number&gt; interfaces, operator overloads, and conversions to various number data types to Number. Also fixed the Tags format for Number.ToString.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Logo\VirtuMath_x256.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

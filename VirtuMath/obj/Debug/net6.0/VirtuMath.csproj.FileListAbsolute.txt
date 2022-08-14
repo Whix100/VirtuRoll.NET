@@ -1,0 +1,12 @@
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.csproj.AssemblyReference.cache
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.GeneratedMSBuildEditorConfig.editorconfig
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.AssemblyInfoInputs.cache
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.AssemblyInfo.cs
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.csproj.CoreCompileInputs.cache
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\bin\Debug\net6.0\VirtuMath.deps.json
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\bin\Debug\net6.0\VirtuMath.dll
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\bin\Debug\net6.0\VirtuMath.pdb
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.dll
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\refint\VirtuMath.dll
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\VirtuMath.pdb
+C:\SharedFiles\Programming\VirtuMath.NET\VirtuMath\obj\Debug\net6.0\ref\VirtuMath.dll
