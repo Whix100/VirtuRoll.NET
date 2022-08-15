@@ -1,6 +1,6 @@
 ﻿namespace VirtuRoll.Numbers;
 
-public abstract class Number : IComparable, IComparable<Number>, IConvertible, IEquatable<Number>
+public abstract class Number : IComparable, IComparable<Number>, IConvertible, IEquatable<Number>, ICloneable
 {
     /// <summary>
     /// The numeric value of the Number.
@@ -186,6 +186,8 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible, I
 
     public ulong ToUInt64(IFormatProvider? provider)
         => Convert.ToUInt64(Value);
+
+    public abstract object Clone();
 
     public static implicit operator short(Number n)
         => (short)n.Value;

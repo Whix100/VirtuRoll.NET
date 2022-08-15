@@ -58,4 +58,7 @@ public class BinaryOperator : Number
                 return Left + Operator + Right;
         }
     }
+
+    public override object Clone()
+        => new BinaryOperator(Operator, (Number)Left.Clone(), (Number)Right.Clone());
 }

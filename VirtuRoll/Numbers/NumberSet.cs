@@ -30,4 +30,7 @@ public class NumberSet : Number
                 return $"({String.Join(", ", Values)})";
         }
     }
+
+    public override object Clone()
+        => new NumberSet(Values.Select((n) => (Number)n.Clone()));
 }

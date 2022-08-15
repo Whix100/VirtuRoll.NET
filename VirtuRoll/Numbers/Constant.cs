@@ -43,4 +43,7 @@ public class Constant : Number
                 return Symbol;
         }
     }
+
+    public override object Clone()
+        => new Constant(Symbol);
 }

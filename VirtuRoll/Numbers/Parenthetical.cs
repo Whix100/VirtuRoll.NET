@@ -30,4 +30,7 @@ public class Parenthetical : Number
                 return $"({Inside.ToString(number_format, format)})";
         }
     }
+
+    public override object Clone()
+        => new Parenthetical((Number)Inside.Clone());
 }

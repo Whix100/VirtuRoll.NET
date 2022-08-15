@@ -22,4 +22,7 @@ public class Literal : Number
                 return Value.ToString(number_format);
         }
     }
+
+    public override object Clone()
+        => new Literal(Value);
 }

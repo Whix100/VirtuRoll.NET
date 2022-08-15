@@ -46,4 +46,7 @@ public class UnaryOperator : Number
                 return Operator + Inside;
         }
     }
+
+    public override object Clone()
+        => new UnaryOperator(Operator, (Number)Inside.Clone());
 }
