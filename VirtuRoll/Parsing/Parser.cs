@@ -36,7 +36,9 @@ public class Parser
         // language=regex
         string CONSTANT = @"(inf|infinity|\u221E|pi|\u03C0|e|tau|\u03C4)";
         // language=regex
-        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT}|\[\d+\])\s*";
+        string DIE = @"d\d+";
+        // language=regex
+        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT}|{DIE}|\[\d+\])\s*";
 
         // language=regex
         ParsingGrammar = new Grammar(new Rule[]
@@ -49,6 +51,7 @@ public class Parser
             new Rule($"(?<={OPERAND})({EXPONENTIAL_OPERATOR})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
             new Rule($"({UNARY_OPERATORS})(?={OPERAND})", ParseUnaryOperator),
+            new Rule($@"(?<=^\s*){DIE}(?=\s*$)", ParseDie),
             new Rule($@"(?<=^\s*){LITERAL}(?=\s*$)", ParseLiteral),
             new Rule($@"(?<=^\s*){CONSTANT}(?=\s*$)", ParseConstant)
         });
@@ -272,6 +275,15 @@ public class Parser
     /// <returns>A UnaryOperator parsed from the input expression.</returns>
     private Number ParseUnaryOperator(string input, Token match)
         => new UnaryOperator(match.Value, Parse(input[match.Length..]));
+
+    /// <summary>
+    /// Parses an expression into a Die.
+    /// </summary>
+    /// <param name="input">An expression to be parsed.</param>
+    /// <param name="match">The regex match for the parsing.</param>
+    /// <returns>A Die parsed from the input expression.</returns>
+    private Number ParseDie(string input, Token match)
+        => new Die(Convert.ToInt32(input[1..]));
 
     /// <summary>
     /// Parses an expression into a Literal.

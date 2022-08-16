@@ -62,11 +62,11 @@ public abstract class Number : IComparable, IComparable<Number>, IConvertible, I
         where T : Number
     {
         IEnumerable<string> members = number.GetType().GetProperties()
-            .Where((p) => !p.Name.Equals("Children") && p.PropertyType != typeof(Number))
+            .Where((p) => !p.Name.Equals("Children") && p.PropertyType != typeof(Number) && !p.Name.Equals("Values"))
             .Select((p) => $"{p.Name} = {ConvertToTypeString(p.GetValue(number), number_format)}")
             .Concat(
                 number.GetType().GetFields()
-                .Where((f) => f.FieldType != typeof(Number) && !f.Name.Equals("Values"))
+                .Where((f) => f.FieldType != typeof(Number))
                 .Select((f) => $"{f.Name} = {ConvertToTypeString(f.GetValue(number), number_format)}"));
 
         return $"<{number.GetType().Name} {String.Join(" ", members)}>" +
