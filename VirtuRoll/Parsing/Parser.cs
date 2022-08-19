@@ -36,9 +36,9 @@ public class Parser
         // language=regex
         string CONSTANT = @"(inf|infinity|\u221E|pi|\u03C0|e|tau|\u03C4)";
         // language=regex
-        string DIE = @"d\d+";
+        string DICE = @"\d{0,3}d\d+";
         // language=regex
-        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT}|{DIE}|\[\d+\])\s*";
+        string OPERAND = $@"\s*({UNARY_OPERATORS}\s*)*({LITERAL}|{CONSTANT}|{DICE}|\[\d+\])\s*";
 
         // language=regex
         ParsingGrammar = new Grammar(new Rule[]
@@ -51,7 +51,7 @@ public class Parser
             new Rule($"(?<={OPERAND})({EXPONENTIAL_OPERATOR})(?={OPERAND})", ParseBinaryOperator,
                 RegexOptions.IgnoreCase | RegexOptions.RightToLeft),
             new Rule($"({UNARY_OPERATORS})(?={OPERAND})", ParseUnaryOperator),
-            new Rule($@"(?<=^\s*){DIE}(?=\s*$)", ParseDie),
+            new Rule($@"(?<=^\s*){DICE}(?=\s*$)", ParseDice),
             new Rule($@"(?<=^\s*){LITERAL}(?=\s*$)", ParseLiteral),
             new Rule($@"(?<=^\s*){CONSTANT}(?=\s*$)", ParseConstant)
         });
@@ -277,13 +277,23 @@ public class Parser
         => new UnaryOperator(match.Value, Parse(input[match.Length..]));
 
     /// <summary>
-    /// Parses an expression into a Die.
+    /// Parses an expression into a Dice.
     /// </summary>
     /// <param name="input">An expression to be parsed.</param>
     /// <param name="match">The regex match for the parsing.</param>
-    /// <returns>A Die parsed from the input expression.</returns>
-    private Number ParseDie(string input, Token match)
-        => new Die(Convert.ToInt32(input[1..]));
+    /// <returns>A Dice parsed from the input expression.</returns>
+    private Number ParseDice(string input, Token match)
+    {
+        string[] parts = match.Value.Split('d');
+
+        switch (parts.First())
+        {
+            case "":
+                return new Dice(Convert.ToInt32(parts.Last()));
+            default:
+                return new Dice(Convert.ToInt32(parts.First()), Convert.ToInt32(parts.Last()));
+        }
+    }
 
     /// <summary>
     /// Parses an expression into a Literal.
